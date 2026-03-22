@@ -3,36 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            width: 360px;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #1e3c72;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #2a5298;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1e3c72;
+        }
+
+        .error {
+            color: red;
+            margin-top: 15px;
+        }
+
+        .success {
+            color: green;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-<div class="page-center">
-    <div class="card">
-        <h1>Connexion</h1>
-        <p>Authentification avec Spring Security</p>
+<div class="container">
+    <h2>Authentification</h2>
 
-        <div th:if="${param.error}" class="alert alert-error">
-            Nom d'utilisateur ou mot de passe incorrect.
-        </div>
+    <form th:action="@{/authenticate}" method="post">
+        <input type="text" name="username" placeholder="Nom d’utilisateur" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <button type="submit">Se connecter</button>
+    </form>
 
-        <div th:if="${param.logout}" class="alert alert-success">
-            Déconnexion réussie.
-        </div>
-
-        <form th:action="@{/login}" method="post">
-            <div class="form-group">
-                <label>Nom d'utilisateur</label>
-                <input type="text" name="username" placeholder="Entrez votre nom d'utilisateur" required>
-            </div>
-
-            <div class="form-group">
-                <label>Mot de passe</label>
-                <input type="password" name="password" placeholder="Entrez votre mot de passe" required>
-            </div>
-
-            <button type="submit" class="btn">Se connecter</button>
-        </form>
-    </div>
+    <p th:if="${param.error}" class="error">Identifiants incorrects.</p>
+    <p th:if="${param.logout}" class="success">Déconnexion réussie.</p>
 </div>
 </body>
 </html>

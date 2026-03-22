@@ -3,51 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <title>Accueil</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Tahoma, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            width: 420px;
+            padding: 30px;
+            border-radius: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #1e3c72;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #444;
+        }
+
+        ul {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        li {
+            margin: 12px 0;
+        }
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            background: #2a5298;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 8px;
+        }
+
+        a:hover {
+            background: #1e3c72;
+        }
+
+        .logout-btn {
+            margin-top: 20px;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #d9534f;
+            color: white;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background: #c9302c;
+        }
+    </style>
 </head>
 <body>
-<div class="dashboard">
-    <div class="navbar">
-        <div class="brand">Spring Security App</div>
-        <div class="nav-links">
-            <a th:href="@{/}">Accueil</a>
-            <a th:href="@{/user/dashboard}">Espace User</a>
-            <a th:href="@{/admin/dashboard}">Espace Admin</a>
-            <form th:action="@{/logout}" method="post" class="logout-form">
-                <button type="submit" class="logout-btn">Déconnexion</button>
-            </form>
-        </div>
-    </div>
+<div class="container">
+    <h2>Bienvenue dans l’application sécurisée</h2>
+    <p>Connexion réussie ! Choisissez votre espace :</p>
 
-    <div class="hero">
-        <h1>Bienvenue</h1>
-        <p>
-            Cette application démontre une authentification en mémoire avec Spring Security,
-            une page de connexion personnalisée et une gestion des accès selon les rôles.
-        </p>
+    <ul>
+        <li><a th:href="@{/user/dashboard}">Espace Utilisateur</a></li>
+        <li><a th:href="@{/admin/dashboard}">Espace Administrateur</a></li>
+    </ul>
 
-        <div class="actions">
-            <a th:href="@{/user/dashboard}" class="btn-small">Voir l'espace utilisateur</a>
-            <a th:href="@{/admin/dashboard}" class="btn-outline">Voir l'espace administrateur</a>
-        </div>
-    </div>
-
-    <div class="cards">
-        <div class="info-card">
-            <h3>USER</h3>
-            <p>Accès à l'espace utilisateur pour les rôles USER et ADMIN.</p>
-        </div>
-
-        <div class="info-card">
-            <h3>ADMIN</h3>
-            <p>Accès réservé uniquement au rôle ADMIN pour les fonctionnalités sensibles.</p>
-        </div>
-
-        <div class="info-card">
-            <h3>Sécurité</h3>
-            <p>Spring Security contrôle l’authentification, l’autorisation et la déconnexion.</p>
-        </div>
-    </div>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-btn">Se déconnecter</button>
+    </form>
 </div>
 </body>
 </html>
